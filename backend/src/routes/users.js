@@ -4,25 +4,30 @@ const router = new express.Router();
 const { generateHash, isValidPassword } = require("../middleware/auth");
 const userSchema = require("../models/user");
 const { verifyToken, generateAccessToken } = require("../middleware/jwt");
+const { sendWelcomeEmail } = require("../email/mail");
 
 router.post("/new", async (req, res) => {
-  const { name, lastName, email, password } = req.body;
-
-  const newUserObj = {
-    name,
-    lastName,
-    email,
-    password,
-  };
-  newUserObj.password = await generateHash(password);
-
-  const token = generateAccessToken({ email });
-
-  const newUser = new userSchema(newUserObj);
-
-  await newUser.save();
-
-  res.status(200).json({ respuesta: "Si jaló", token });
+  try {
+    const { name, lastName, email, password } = req.body;
+    const usr = await userSchema.findOne({ email });
+    if (usr) {
+      return res.status(409).send({ msg: "Ya existe un usuario asociado a esta cuenta de correo electrónico." });
+    }
+    const newUserObj = {
+      name,
+      lastName,
+      email,
+      password,
+    };
+    newUserObj.password = await generateHash(password);
+    const token = generateAccessToken({ email });
+    const newUser = new userSchema(newUserObj);
+    await newUser.save();
+    // sendWelcomeEmail(email, `${name} ${lastName}.`);
+    res.status(200).json({ respuesta: "Si jaló", token });
+  } catch (error) {
+    res.status(404).send({msg: 'El servicio no se encuentra disponible por el momento, inténtalo de nuevo más tarde.'});
+  }
 });
 
 router.post("/login", async (req, res) => {
