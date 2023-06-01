@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT; // Port for Heroku deployment
 
 app.use(express.json());
-app.use(userRouter);
+app.use("/api", userRouter);
 
 app.listen(port, () => {
   console.log("Server running at port", port);

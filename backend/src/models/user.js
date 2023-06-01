@@ -20,11 +20,19 @@ const UserSchema = new mongoose.Schema({
   },
   tries: {
     type: Number,
-    default: 0,
+    default: 3,
   },
   status: {
     type: String,
-    default: "enabled",
+    default: "ENABLED",
+  },
+  authCode: {
+    type: String,
+    default: "",
+  },
+  verified: {
+    type: Boolean,
+    default: false,
   },
 });
 

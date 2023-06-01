@@ -7,35 +7,22 @@ const sendWelcomeEmail = (email, name) => {
   const message = {
     to: email,
     from: "erickce40@gmail.com",
-    subject: `Welcome to the app, ${name}!`,
+    subject: `Gracias por crear una cuenta en nuestra app, ${name}.`,
     html: mailTemplate(name),
   };
   sgMail.send(message);
 };
-const sendResetPasswordEmail = (email, name) => {
+const sendResetPasswordEmail = (email, name, code) => {
   const message = {
     to: email,
     from: "erickce40@gmail.com",
-    subject: `Welcome to the app, ${name}!`,
-    html: mailTemplate(name),
+    subject: "Código para reestablecer contraseña.",
+    text: `Hola, ${name}. El código para reestablecer tu contraseña es: ${code}.`,
   };
   sgMail.send(message);
-};
-
-const sendGoodbyeEmail = (email, name) => {
-  const message = {
-    to: email,
-    from: "erickce40@gmail.com",
-    subject: `We are sorry you decided to left our app, ${name}`,
-  };
-  sgMail
-    .send(message)
-    .then(() => {})
-    .catch(() => {});
 };
 
 module.exports = {
   sendWelcomeEmail,
-  sendGoodbyeEmail,
   sendResetPasswordEmail,
 };
