@@ -38,7 +38,11 @@ const ForgotPassword = () => {
       );
       if (resp.ok) {
         const { user } = resp;
-        Swal.fire("Contraseña reestablecida correctamente", `${resp.msg}`, "success");
+        Swal.fire(
+          "Contraseña reestablecida correctamente",
+          `${resp.msg}`,
+          "success"
+        );
         localStorage.setItem("token", user.token);
         localStorage.setItem("email", user.email);
         setTimeout(() => {
@@ -61,7 +65,7 @@ const ForgotPassword = () => {
           </Text>
 
           <Input
-            type="string"
+            type="text"
             name="authCode"
             placeholder="Código de verificación"
             value={form.authCode}
@@ -69,7 +73,7 @@ const ForgotPassword = () => {
             required
           ></Input>
           <Input
-            type="string"
+            type="password"
             name="password1"
             placeholder="Nueva contraseña"
             value={form.password1}
@@ -77,7 +81,7 @@ const ForgotPassword = () => {
             required
           ></Input>
           <Input
-            type="string"
+            type="password"
             name="password2"
             placeholder="Repite tu nueva contraseña"
             value={form.password2}
@@ -86,7 +90,7 @@ const ForgotPassword = () => {
           ></Input>
 
           <Button type="submit" colorScheme="green">
-            Enviar instrucciones para reestablecer contraseña
+            Reestablecer contraseña
           </Button>
         </VStack>
       </form>
