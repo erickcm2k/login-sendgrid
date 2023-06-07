@@ -49,18 +49,16 @@ const SignIn = () => {
             <Input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="Correo electrónico"
               value={form.email}
               onChange={onChange}
-              autoComplete="off"
             />
             <Input
-              type="username"
+              type="text"
               name="username"
               placeholder="Username"
               value={form.username}
               onChange={onChange}
-              autoComplete="off"
             />
 
             <Input
@@ -69,7 +67,6 @@ const SignIn = () => {
               placeholder="Contraseña"
               value={form.password}
               onChange={onChange}
-              autoComplete="off"
             />
 
             <Button variant="link" colorScheme="blue">
