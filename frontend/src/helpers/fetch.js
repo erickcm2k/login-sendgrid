@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:4000";
+const baseUrl = "https://practica-04.herokuapp.com";
 
 export const noTokenFetch = async (endpoint, data, method = "GET") => {
   const url = `${baseUrl}/${endpoint}`;
